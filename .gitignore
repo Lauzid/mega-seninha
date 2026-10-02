@@ -1,3 +1,8 @@
+### Projeto ###
+.idea/
+*.iml
+GANHADORES.TXT
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
