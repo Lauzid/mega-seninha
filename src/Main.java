@@ -1,4 +1,6 @@
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Main {
     static final int QTD_NUMEROS = 6;
@@ -16,7 +18,12 @@ public class Main {
         return vetorInteiros;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+        File arquivo = new File("APOSTAS.TXT");
+        Scanner entrada = new Scanner(arquivo);
 
+        System.out.println(entrada.nextLine());
+
+        entrada.close();
     }
 }
