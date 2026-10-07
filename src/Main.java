@@ -38,7 +38,9 @@ public class Main {
 
     /* [PARTE 03]
     Formatar o CPF. */
+    static String formatarCPF(String cpfCru) {
 
+    }
 
     /* [PARTE 04]
     Lê o sorteio (números 'vencedores') e processa apostas. */
