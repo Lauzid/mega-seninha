@@ -39,7 +39,7 @@ public class Main {
     /* [PARTE 03]
     Formatar o CPF. */
     static String formatarCPF(String cpfCru) {
-
+        return cpfCru.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
     }
 
     /* [PARTE 04]
@@ -52,7 +52,8 @@ public class Main {
 
             // se a aposta ganhou (Parte 2), escrever o CPF formatado (Parte 3) no arquivo de saída.
             if (verificarVencedor(sorteados, aposta)) {
-                // Formatação e gravação do CPF.
+                // Formatação (função) e gravação do CPF.
+                System.out.println(formatarCPF(cpf)); // Depuração. APAGAR DEPOIS.
             }
         }
     }
