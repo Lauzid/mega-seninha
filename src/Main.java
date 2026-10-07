@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -12,7 +11,8 @@ public class Main {
         return Arrays.toString(vetor);
     }
 
-    // Converte uma linha de texto em vetor de inteiros.
+    /* [PARTE 01]
+    Converte uma linha de texto em vetor de inteiros. */
     static int[] converterLinhaParaVetor(String linha){
         int[] vetorInteiros = new int[QTD_NUMEROS];
         String[] partes = linha.split(" ");
@@ -25,7 +25,8 @@ public class Main {
         return vetorInteiros;
     }
 
-    // Função verificadora da aposta vencedora.
+    /* [PARTE 02]
+    Função verificadora da aposta vencedora. */
     static boolean verificarVencedor(int[] sorteados, int[] aposta){
         for (int i = 0; i < QTD_NUMEROS; i++) {
             if (sorteados[i] != aposta[i]){
@@ -35,32 +36,31 @@ public class Main {
         return true;
     }
 
-    static void processarApostas() throws FileNotFoundException{
-        File arquivo = new File("APOSTAS.TXT");
-        Scanner entrada = new Scanner(arquivo);
+    /* [PARTE 03]
+    Formatar o CPF. */
 
-        // Define os números sorteados lendo a primeira string do arquivo.
-        int[] sorteados = converterLinhaParaVetor(entrada.nextLine());
-        System.out.println("Sorteado: "+Arrays.toString(sorteados)); // Depuração. APAGAR DEPOIS.
 
+    /* [PARTE 04]
+    Lê o sorteio (números 'vencedores') e processa apostas. */
+    static void processarApostas(Scanner entrada, int[] sorteados) {
         // Compara números sorteados com aposta.
         while (entrada.hasNextLine()){
             String cpf = entrada.nextLine();
             int[] aposta = converterLinhaParaVetor(entrada.nextLine());
 
-            boolean ganhou = verificarVencedor(sorteados, aposta);
-
             // se a aposta ganhou (Parte 2), escrever o CPF formatado (Parte 3) no arquivo de saída.
-            if (ganhou) {
-                // Parte 3
+            if (verificarVencedor(sorteados, aposta)) {
+                // Formatação e gravação do CPF.
             }
-            System.out.println(cpf+" -> "+ganhou);
         }
-
-        entrada.close();
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        processarApostas();
+        Scanner entrada = new Scanner(new File("APOSTAS.TXT"));
+        int[] sorteados = converterLinhaParaVetor(entrada.nextLine());
+
+        processarApostas(entrada, sorteados);
+
+        entrada.close();
     }
 }
