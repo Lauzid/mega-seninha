@@ -5,9 +5,10 @@ import java.util.Scanner;
 
 public class Main {
     static final int QTD_NUMEROS = 6;
+    static final String ARQUIVO_ENTRADA = "APOSTAS.TXT";
+    static final String ARQUIVO_SAIDA = "GANHADORES.TXT";
 
-    /* [PARTE 01]
-    Converte uma linha de texto em vetor de inteiros. */
+    // Converte uma linha de texto em vetor de inteiros.
     static int[] converterLinhaParaVetor(String linha){
         int[] vetorInteiros = new int[QTD_NUMEROS];
         String[] partes = linha.split(" ");
@@ -20,8 +21,7 @@ public class Main {
         return vetorInteiros;
     }
 
-    /* [PARTE 02]
-    Compara todas apostas com números sorteados. Retorna true para vencedores e false para os restantes. */
+    // Retorna true se a aposta tem os mesmos números do sorteio.
     static boolean verificarVencedor(int[] sorteados, int[] aposta){
         for (int i = 0; i < QTD_NUMEROS; i++) {
             if (sorteados[i] != aposta[i]){
@@ -31,14 +31,13 @@ public class Main {
         return true;
     }
 
-    /* [PARTE 03]
-    Formata o CPF separando por pontos e hífen usando regex que agrupa subconjuntos da string de input. */
+    // Formata o CPF separando por pontos e hífen usando regex que agrupa subconjuntos da string de input.
     static String formatarCPF(String cpfCru) {
         return cpfCru.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
     }
 
-    /* [PARTE 04]
-    Analisa o sorteio para processar apostas. */
+    // Percorre as apostas do arquivo, uma por vez, e grava no arquivo de saída
+    // o CPF formatado de cada apostador que acertou os números sorteados.
     static void processarApostas(Scanner entrada, int[] sorteados, PrintWriter saida) {
         while (entrada.hasNextLine()){
             String cpf = entrada.nextLine();
@@ -51,8 +50,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        PrintWriter saida = new PrintWriter("GANHADORES.TXT");
-        Scanner entrada = new Scanner(new File("APOSTAS.TXT"));
+        Scanner entrada = new Scanner(new File(ARQUIVO_ENTRADA));
+        PrintWriter saida = new PrintWriter(ARQUIVO_SAIDA);
         int[] sorteados = converterLinhaParaVetor(entrada.nextLine());
 
         processarApostas(entrada, sorteados, saida);
