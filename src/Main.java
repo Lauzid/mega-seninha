@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Main {
@@ -38,24 +39,25 @@ public class Main {
 
     /* [PARTE 04]
     Analisa o sorteio para processar apostas. */
-    static void processarApostas(Scanner entrada, int[] sorteados) {
+    static void processarApostas(Scanner entrada, int[] sorteados, PrintWriter saida) {
         while (entrada.hasNextLine()){
             String cpf = entrada.nextLine();
             int[] aposta = converterLinhaParaVetor(entrada.nextLine());
 
-            // se a aposta ganhou (Parte 2), escrever o CPF formatado (Parte 3) no arquivo de saída.
             if (verificarVencedor(sorteados, aposta)) {
-                System.out.println(formatarCPF(cpf)); // Depuração. APAGAR DEPOIS.
+                saida.println(formatarCPF(cpf));
             }
         }
     }
 
     public static void main(String[] args) throws FileNotFoundException {
+        PrintWriter saida = new PrintWriter("GANHADORES.TXT");
         Scanner entrada = new Scanner(new File("APOSTAS.TXT"));
         int[] sorteados = converterLinhaParaVetor(entrada.nextLine());
 
-        processarApostas(entrada, sorteados);
+        processarApostas(entrada, sorteados, saida);
 
         entrada.close();
+        saida.close();
     }
 }
